@@ -19,17 +19,19 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "migration:generate": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:generate -d ormconfig.ts",
-    "migration:up": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run -d ormconfig.ts",
-    "migration:down": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:revert -d ormconfig.ts"
+    "migration:generate": "ts-node typeorm migration:generate -d ormconfig.ts",
+    "migration:up": "ts-node ./node_modules/.bin/typeorm migration:run -d ormconfig.ts",
+    "migration:down": "ts-node ./node_modules/.bin/typeorm migration:revert -d ormconfig.ts"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^2.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/serve-static": "^2.2.2",
     "@nestjs/typeorm": "^8.0.3",
     "dotenv": "^16.0.0",
+    "ejs": "^3.1.7",
     "pg": "^8.4.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

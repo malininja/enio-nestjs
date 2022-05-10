@@ -1,0 +1,29 @@
+<html>
+<head>
+  <title><%= title %></title>
+  <%- include("styles") -%>
+  <%- include("scripts") -%>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/home/racun-list">Računi</a></li>
+                    <li><a href="/home/artikl">Artikl</a></li>
+                    <li><a href="/home/partner">Partner</a></li>
+                    <li><a href="/home/tarifa">Tarifa</a></li>
+                    <li><a href="/home/pdv">PDV</a></li>
+                    <li><a href="/home/firma">Postavke</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
