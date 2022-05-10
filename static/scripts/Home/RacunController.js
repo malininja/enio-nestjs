@@ -138,7 +138,7 @@ app.controller("RacunController", ["$scope", function ($scope) {
 
         var firma = enioNg.api.firma.get();
 
-        if (firma.aktivna_godina !== year) {
+        if (firma.aktivnaGodina !== year) {
             alert("Datum računa nije u aktivnoj poslovnoj godini. Račun nije pohranjen.");
             return false;
         }

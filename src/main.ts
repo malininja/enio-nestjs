@@ -1,4 +1,4 @@
-import { HttpServer } from '@nestjs/common';
+import { HttpServer, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { join } from 'path';
 import { AppModule } from './app.module';
@@ -34,14 +34,12 @@ function homeRouter(httpServer: HttpServer): void {
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  console.log('PATH', join(__dirname, 'static'));
   const httpAdapter: HttpServer = app.getHttpAdapter();
   homeRouter(httpAdapter);
 
-  // httpAdapter.set('view engine', 'ejs');
-  // httpAdapter.set('views', __dirname + '/views');
-  // httpAdapter.use(express.static(path.join(__dirname, 'static')));
   httpAdapter.setViewEngine('ejs');
+
+  app.useGlobalPipes(new ValidationPipe());
   await app.listen(3000);
 }
 bootstrap();

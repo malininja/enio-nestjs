@@ -42,7 +42,7 @@ app.controller("FirmaController", ["$scope", function ($scope) {
     };
 
     $scope.validation.isAktivnaGodinaValid = function () {
-        var godina = $scope.firma.aktivna_godina;
+        var godina = $scope.firma.aktivnaGodina;
 
         if (ninjaSoftware.validation.isNumeric(godina)) {
             if (godina >= 2005 && godina <= 2025) {

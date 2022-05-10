@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { FirmaModule } from './firma/firma.module';
 
 @Module({
   imports: [
@@ -25,8 +24,7 @@ import { join } from 'path';
       }),
     }),
     ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', '../static') }),
+    FirmaModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
