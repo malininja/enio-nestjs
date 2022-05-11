@@ -10,9 +10,8 @@ export class FirmaService {
     @InjectRepository(Firma) private firmaRepository: Repository<Firma>,
   ) {}
 
-  async get(id: number): Promise<Firma> {
-    const a = await this.firmaRepository.findOne({ where: { id } });
-    return a;
+  get(id: number): Promise<Firma> {
+    return this.firmaRepository.findOne({ where: { id } });
   }
 
   async save(id: number, firmaDto: FirmaDto): Promise<Firma> {
@@ -33,9 +32,5 @@ export class FirmaService {
     if (result.affected === 0) throw new Error('Entity is not updated');
 
     return this.get(id);
-  }
-
-  async getFirmaId() {
-    return 1;
   }
 }

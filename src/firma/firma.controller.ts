@@ -9,13 +9,13 @@ export class FirmaController {
 
   @Get()
   async getFirma(): Promise<Firma> {
-    const firmaId = await this.firmaService.getFirmaId();
+    const firmaId = 1;
     return this.firmaService.get(firmaId);
   }
 
   @Post()
   async saveFirma(@Body() firmaDto: FirmaDto): Promise<Firma> {
-    const firmaId = await this.firmaService.getFirmaId();
+    const firmaId = 1;
     return this.firmaService.save(firmaId, firmaDto);
   }
 }

@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { FirmaModule } from './firma/firma.module';
+import { PdvModule } from './pdv/pdv.module';
 
 @Module({
   imports: [
@@ -21,10 +22,12 @@ import { FirmaModule } from './firma/firma.module';
         database: configService.get('DB_DATABASE'),
         autoLoadEntities: true,
         synchronize: false,
+        logging: process.env.STAGE !== 'prod',
       }),
     }),
     ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', '../static') }),
     FirmaModule,
+    PdvModule,
   ],
 })
 export class AppModule {}
