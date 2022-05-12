@@ -36,7 +36,7 @@
                 <tr>
                     <td>Pdv:</td>
                     <td>
-                        <select ng-model="selectedArtikl.pdv_id"
+                        <select ng-model="selectedArtikl.pdv.id"
                             ng-options="pdv.id as pdv.naziv for pdv in pdvCollection"></select>
                     </td>
                     <td>
@@ -115,7 +115,7 @@
                 { name: "id", index: "id", hidden: true, width: 0 },
                 { name: "naziv", index: "naziv", width: 250, searchoptions: { clearSearch: false } },
                 { name: "jm", index: "jm", width: 90, searchoptions: { clearSearch: false } },
-                { name: "pdv_stopa", index: "pdv_stopa", width: 90, sortable: false, align: "right", formatter: "number", formatoptions: { decimalSeparator: ",", decimalPlaces: 2 },
+                { name: "pdv.stopa", index: "pdv.stopa", width: 90, sortable: false, align: "right", formatter: "number", formatoptions: { decimalSeparator: ",", decimalPlaces: 2 },
                     searchoptions: { clearSearch: false } },
                 { name: "cijena", index: "cijena", width: 100, align: "right", formatter: "number", formatoptions: { decimalSeparator: ",", decimalPlaces: 2 }, 
                     searchoptions: { clearSearch: false } },

@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { FirmaDto } from './dto/firma.dto';
+import { FirmaDto } from './firma.dto';
 import { Firma } from './firma.entity';
 import { FirmaService } from './firma.service';
 

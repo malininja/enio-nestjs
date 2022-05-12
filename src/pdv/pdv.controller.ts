@@ -3,8 +3,8 @@ import {
   getJqGridResponse,
   JqGridQueryDto,
   JqGridResponse,
-} from 'src/common/jqGrid';
-import { PdvDto } from './dto/pdv.dto';
+} from '../common/jq-grid';
+import { PdvDto } from './pdv.dto';
 import { Pdv } from './pdv.entity';
 import { PdvService } from './pdv.service';
 
@@ -16,7 +16,6 @@ export class PdvController {
   async getPdvs(
     @Query() jqGridQueryDto: JqGridQueryDto,
   ): Promise<JqGridResponse> {
-    console.log(jqGridQueryDto);
     const firmaId = 1;
     const pdvs = await this.pdvService.getAll(firmaId, jqGridQueryDto);
     const count = await this.pdvService.getCount(firmaId, jqGridQueryDto);

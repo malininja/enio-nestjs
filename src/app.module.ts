@@ -5,6 +5,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { FirmaModule } from './firma/firma.module';
 import { PdvModule } from './pdv/pdv.module';
+import { ArtiklModule } from './artikl/artikl.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { PdvModule } from './pdv/pdv.module';
     ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', '../static') }),
     FirmaModule,
     PdvModule,
+    ArtiklModule,
   ],
 })
 export class AppModule {}

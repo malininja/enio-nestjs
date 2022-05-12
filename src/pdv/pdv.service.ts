@@ -1,16 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import {
-  getJqGridFilters,
-  getPagingData,
-  getSortData,
-  JqGridFilter,
-  JqGridQueryDto,
-} from 'src/common/jqGrid';
+import { JqGridFilter, JqGridQueryDto } from '../common/jq-grid';
 import { parseDecimal } from 'src/common/parsers';
 import { Repository, SelectQueryBuilder } from 'typeorm';
-import { PdvDto } from './dto/pdv.dto';
+import { PdvDto } from './pdv.dto';
 import { Pdv } from './pdv.entity';
+import {
+  generateTimestamp,
+  createJqGridQuery,
+  createGetCountQuery,
+} from 'src/common/database';
 
 @Injectable()
 export class PdvService {
@@ -18,57 +17,32 @@ export class PdvService {
 
   get(firmaId: number, pdvId: number): Promise<Pdv> {
     return this.pdvRepository.findOne({
-      where: { firmaId, id: pdvId },
+      where: { id: pdvId, firmaId },
     });
   }
 
   getAll(firmaId: number, jqGridQueryDto: JqGridQueryDto): Promise<Pdv[]> {
-    const { pageSize, offset } = getPagingData(jqGridQueryDto);
-    const sortData = getSortData(jqGridQueryDto);
-    const filter = getJqGridFilters(jqGridQueryDto);
-
     const query = this.pdvRepository.createQueryBuilder('pdv');
-    query.where({ firmaId });
-
-    if (filter) {
-      this.addFilters(filter, query);
-    }
-
-    if (sortData) {
-      const { field, order } = sortData;
-      query.orderBy(`pdv.${field}`, order);
-    }
-
-    query.skip(offset);
-    query.take(pageSize);
-
+    createJqGridQuery(query, 'pdv', firmaId, jqGridQueryDto, this.addFilters);
     return query.getMany();
   }
 
   getCount(firmaId: number, jqGridQueryDto: JqGridQueryDto): Promise<number> {
-    const filter = getJqGridFilters(jqGridQueryDto);
-
     const query = this.pdvRepository.createQueryBuilder('pdv');
-    query.where({ firmaId });
-
-    if (filter) {
-      this.addFilters(filter, query);
-    }
-
+    createGetCountQuery(query, firmaId, jqGridQueryDto, this.addFilters);
     return query.getCount();
   }
 
   async save(firmaId: number, pdvDto: PdvDto): Promise<Pdv> {
     const { id, naziv, stopa: stopaString, timestamp } = pdvDto;
     const stopa = parseDecimal(stopaString);
-    console.log('id', id);
 
     if (!id) {
       const pdv = this.pdvRepository.create({
         naziv,
         stopa,
         firmaId,
-        timestamp: new Date().getTime().toString(),
+        timestamp: generateTimestamp(),
       });
 
       return this.pdvRepository.save(pdv);
@@ -76,7 +50,7 @@ export class PdvService {
 
     const result = await this.pdvRepository.update(
       { id, firmaId, timestamp },
-      { naziv, stopa },
+      { naziv, stopa, timestamp: generateTimestamp() },
     );
 
     if (!result.affected) return null;

@@ -41,8 +41,8 @@ export class JqGridResponse {
 export function getPagingData(jqGridQueryDto: JqGridQueryDto): PagingData {
   const { rows, page } = jqGridQueryDto;
 
-  const pageSize = parseInt(rows);
-  const pageNo = parseInt(page);
+  const pageSize = rows ? parseInt(rows) : 0;
+  const pageNo = page ? parseInt(page) : 0;
   const offset = pageSize * (pageNo - 1);
 
   return { pageSize, pageNo, offset };

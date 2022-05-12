@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { generateTimestamp } from 'src/common/database';
 import { Repository } from 'typeorm';
-import { FirmaDto } from './dto/firma.dto';
+import { FirmaDto } from './firma.dto';
 import { Firma } from './firma.entity';
 
 @Injectable()
@@ -25,7 +26,7 @@ export class FirmaService {
         mjesto,
         oib,
         zr,
-        timestamp: new Date().getTime().toString(),
+        timestamp: generateTimestamp(),
       },
     );
 
