@@ -19,7 +19,7 @@ export class ArtiklController {
   }
 
   @Get()
-  async getPdvs(
+  async getArtikls(
     @Query() jqGridQueryDto: JqGridQueryDto,
   ): Promise<JqGridResponse> {
     const firmaId = 1;

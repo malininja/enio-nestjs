@@ -9,10 +9,10 @@ export class Firma {
   aktivnaGodina: number;
 
   @Column({ nullable: true })
-  adresa: string;
+  adresa?: string;
 
   @Column({ nullable: true })
-  mjesto: string;
+  mjesto?: string;
 
   @Column()
   naziv: string;
@@ -21,7 +21,7 @@ export class Firma {
   oib: string;
 
   @Column({ nullable: true })
-  zr: string;
+  zr?: string;
 
   @Column()
   timestamp: string;

@@ -1,5 +1,6 @@
 import { Artikl } from 'src/artikl/artikl.entity';
 import { Pdv } from 'src/pdv/pdv.entity';
+import { Partner } from 'src/partner/partner.entity';
 import { SelectQueryBuilder } from 'typeorm';
 import {
   getJqGridFilters,
@@ -15,11 +16,11 @@ export function generateTimestamp(): string {
 
 type AddFiltersHandler = (
   filter: JqGridFilter,
-  query: SelectQueryBuilder<Pdv | Artikl>,
+  query: SelectQueryBuilder<Pdv | Artikl | Partner>,
 ) => void;
 
 export function createJqGridQuery(
-  query: SelectQueryBuilder<Pdv | Artikl>,
+  query: SelectQueryBuilder<Pdv | Artikl | Partner>,
   tableName: string,
   firmaId: number,
   jqGridQueryDto: JqGridQueryDto,
@@ -45,7 +46,7 @@ export function createJqGridQuery(
 }
 
 export function createGetCountQuery(
-  query: SelectQueryBuilder<Pdv | Artikl>,
+  query: SelectQueryBuilder<Pdv | Artikl | Partner>,
   firmaId: number,
   jqGridQueryDto: JqGridQueryDto,
   addFilters: AddFiltersHandler,

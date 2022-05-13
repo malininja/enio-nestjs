@@ -24,7 +24,7 @@ export class ArtiklDto {
   naziv: string;
 
   @IsString()
-  @Length(2, 10)
+  @Length(1, 10)
   @IsNotEmpty()
   jm: string;
 
